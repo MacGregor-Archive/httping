@@ -22,7 +22,6 @@ defmodule LiveViewDemoWeb do
       use Phoenix.Controller, namespace: LiveViewDemoWeb
 
       import Plug.Conn
-      import LiveViewDemoWeb.Gettext
       alias LiveViewDemoWeb.Router.Helpers, as: Routes
       import Phoenix.LiveView.Controller, only: [live_render: 3]
     end
@@ -41,7 +40,6 @@ defmodule LiveViewDemoWeb do
       use Phoenix.HTML
 
       import LiveViewDemoWeb.ErrorHelpers
-      import LiveViewDemoWeb.Gettext
       import Phoenix.LiveView, only: [live_render: 2, live_render: 3, live_link: 1, live_link: 2]
       alias LiveViewDemoWeb.Router.Helpers, as: Routes
     end
@@ -59,7 +57,6 @@ defmodule LiveViewDemoWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import LiveViewDemoWeb.Gettext
     end
   end
 

@@ -1,11 +1,10 @@
 defmodule LiveViewDemoWeb.ClockLive do
   use Phoenix.LiveView
-  import Calendar.Strftime
 
   def render(assigns) do
     ~L"""
     <div>
-      <h2 phx-click="boom">It's <%= strftime!(@date, "%r") %></h2>
+      <h2 phx-click="boom">It's <%= @date %></h2>
     </div>
     """
   end
@@ -21,6 +20,6 @@ defmodule LiveViewDemoWeb.ClockLive do
   end
 
   defp put_date(socket) do
-    assign(socket, date: :calendar.local_time())
+    assign(socket, date: DateTime.utc_now())
   end
 end

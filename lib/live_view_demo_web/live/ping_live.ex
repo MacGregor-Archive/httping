@@ -1,8 +1,9 @@
-defmodule LiveViewDemoWeb.ClockLive do
+defmodule LiveViewDemoWeb.PingLive do
   use Phoenix.LiveView
 
   def render(assigns) do
     ~L"""
+    <h1 class="text-3xl font-bold">httping</h1>
     <div>
       <h2 phx-click="boom">It's <%= @date %></h2>
     </div>

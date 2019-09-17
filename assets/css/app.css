@@ -2,4 +2,4 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "../../deps/phoenix_live_view/assets/css/live_view.css";
+@import "./live_view.css";

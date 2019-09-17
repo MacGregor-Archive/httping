@@ -1,4 +1,0 @@
-<section>
-  <h1 class="text-4xl font-bold">httping</h1>
-  <p><%= link "This clock", to: Routes.live_path(@conn, LiveViewDemoWeb.ClockLive), class: "underline" %> is a basic live view in action.</p>
-</section>

@@ -7,7 +7,7 @@
     <title>httping</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
   </head>
-  <body class="font-sans antialiased bg-gray-900 text-white">
+  <body class="font-sans antialiased bg-gray-800 text-white">
     <header></header>
     <main role="main">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>

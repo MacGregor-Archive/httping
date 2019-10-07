@@ -10,11 +10,15 @@ use Mix.Config
 # Configures the endpoint
 config :live_view_demo, LiveViewDemoWeb.Endpoint,
   url: [host: System.get_env("HOST") || "localhost"],
-  secret_key_base: System.get_env("SECRET_KEY_BASE") || "dummy_secret_key_base",
+  secret_key_base:
+    System.get_env("SECRET_KEY_BASE") ||
+      "7z2h9xkid4raz+8XhERrgUOLJd+GNdhbTQB537UBUcRDAs7DO8lzyuHDAYqDz+dI",
   render_errors: [view: LiveViewDemoWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: LiveViewDemo.PubSub, adapter: Phoenix.PubSub.PG2],
   live_view: [
-    signing_salt: System.get_env("SIGNING_SALT") || "dummy_signing_salt"
+    signing_salt:
+      System.get_env("SIGNING_SALT") ||
+        "ZWoUIYzwkGuNUWE1NhroWXICHby0GCFEdZ37cqjL/ziBPWaacHuUAve8GOydrFKx"
   ]
 
 # Configures Elixir's Logger

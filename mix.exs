@@ -35,7 +35,7 @@ defmodule LiveViewDemo.MixProject do
     [
       {:phoenix, "~> 1.4.9"},
       {:phoenix_pubsub, "~> 1.1"},
-      {:phoenix_live_view, "~> 0.2.0"},
+      {:phoenix_live_view, "~> 0.3"},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:jason, "~> 1.0"},

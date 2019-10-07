@@ -1,0 +1,16 @@
+<%
+  total = @trace["t11_ttfb"]
+  dns = @trace["t03_dns_done"]
+  connect = @trace["t05_connect_done"] - dns
+  tls = if @trace["t07_tls_done"], do: @trace["t07_tls_done"] - connect, else: nil
+  ttfb = @trace["t11_ttfb"] - (@trace["t07_tls_done"] || @trace["t05_connect_done"])
+%>
+
+<div class="w-full flex rounded-t">
+  <div class="<%= if @section == :dns, do: "bg-green-500" %> h-1" style="width:<%= dns/total * 100 %>%">&nbsp;</div>
+  <div class="<%= if @section == :connect, do: "bg-orange-500" %> h-1" style="width:<%= connect/total * 100 %>%">&nbsp;</div>
+  <%= if tls do %>
+    <div class="<%= if @section == :tls, do: "bg-blue-500" %> h-1" style="width:<%= tls/total * 100 %>%">&nbsp;</div>
+  <% end %>
+  <div class="<%= if @section == :response, do: "bg-red-500" %> h-1" style="width:<%= ttfb/total * 100 %>%">&nbsp;</div>
+</div>

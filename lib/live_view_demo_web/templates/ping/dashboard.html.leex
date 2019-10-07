@@ -1,0 +1,52 @@
+<%= unless assigns[:url] do %>
+  <h1 class="text-2xl font-semibold">httping</h1>
+  <%= form_for :check, "#", [phx_change: :validate, phx_submit: :save, phx_hook: "SavedForm"], fn f -> %>
+    <%= text_input f, :url, class: "py-2 px-3 w-full rounded bg-gray-700 border border-gray-100 text-xl" %>
+  <% end %>
+<% end %>
+
+<%= if assigns[:url] && !assigns[:response] do %>
+  <h1 class="text-2xl font-semibold flex">
+    <%= live_link "<-", to: Routes.live_path(@socket, LiveViewDemoWeb.PingLive) %>
+    <%= assigns[:url] %>
+  </h1>
+<% end %>
+
+<%= if assigns[:response] do %>
+  <h1 class="text-2xl font-semibold flex">
+    <%= live_link "<-", to: Routes.live_path(@socket, LiveViewDemoWeb.PingLive) %>
+    <%= assigns[:url] %>
+    <%= Enum.map(assigns[:response], fn x -> x |> Map.get("trace") |> Map.get("t11_ttfb") |> div 1000 end) |> Enum.sum %>ms
+  </h1>
+  <div class="flex flex-col-reverse">
+    <%= for {request, i} <- Enum.with_index(assigns[:response], 1) do %>
+      <div>
+        <h2 class="mt-8 mb-2 flex justify-between text-sm">
+          <div>#<%= i %> - <%= request["request"]["url"] %></div>
+          <div><%= request |> Map.get("trace") |> Map.get("t11_ttfb") |> div 1000 %>ms</div>
+        </h2>
+        <div class="border border-gray-700 rounded-sm">
+          <%= render "_trace.html", trace: request["trace"], section: :dns %>
+          <section class="p-4 border-b border-gray-700">
+            <%= render "_dns.html", dns: request["dns"], time: request["trace"]["t03_dns_done"] / 1000 |> Float.round(1) %>
+          </section>
+          <%= render "_trace.html", trace: request["trace"], section: :connect %>
+          <section class="p-4 border-b border-gray-700">
+            <%= render "_conn.html", conn: request["conn"], time: (request["trace"]["t05_connect_done"] - request["trace"]["t03_dns_done"]) / 1000 |> Float.round(1) %>
+          </section>
+          <%= if request["ssl"] && request["ssl"] != %{} do %>
+            <%= render "_trace.html", trace: request["trace"], section: :tls %>
+            <section class="p-4 border-b border-gray-700">
+              <%= render "_tls.html", ssl: request["ssl"], time: (request["trace"]["t07_tls_done"] - request["trace"]["t05_connect_done"])  / 1000 |> Float.round(1) %>
+            </section>
+          <% end %>
+          <%= render "_trace.html", trace: request["trace"], section: :response %>
+          <section class="p-4">
+            <%= render "_response.html", response: request["response"], time: (request["trace"]["t11_ttfb"] - (request["trace"]["t07_tls_done"] || request["trace"]["t05_connect_done"]))  / 1000 |> Float.round(1) %>
+          </section>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="flex justify-end text-sm mt-2"><%= render "_trace_key.html" %></div>
+<% end %>

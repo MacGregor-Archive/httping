@@ -13,5 +13,6 @@ defmodule LiveViewDemoWeb.Router do
   scope "/", LiveViewDemoWeb do
     pipe_through :browser
     live "/", PingLive
+    live "/:url", PingLive
   end
 end

@@ -1,12 +1,12 @@
-defmodule LiveViewDemoWeb do
+defmodule HTTPingWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
 
   This can be used in your application as:
 
-      use LiveViewDemoWeb, :controller
-      use LiveViewDemoWeb, :view
+      use HTTPingWeb, :controller
+      use HTTPingWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -19,10 +19,10 @@ defmodule LiveViewDemoWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: LiveViewDemoWeb
+      use Phoenix.Controller, namespace: HTTPingWeb
 
       import Plug.Conn
-      alias LiveViewDemoWeb.Router.Helpers, as: Routes
+      alias HTTPingWeb.Router.Helpers, as: Routes
       import Phoenix.LiveView.Controller, only: [live_render: 3]
     end
   end
@@ -30,8 +30,8 @@ defmodule LiveViewDemoWeb do
   def view do
     quote do
       use Phoenix.View,
-        root: "lib/live_view_demo_web/templates",
-        namespace: LiveViewDemoWeb
+        root: "lib/httping_web/templates",
+        namespace: HTTPingWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
@@ -39,9 +39,9 @@ defmodule LiveViewDemoWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import LiveViewDemoWeb.ErrorHelpers
+      import HTTPingWeb.ErrorHelpers
       import Phoenix.LiveView, only: [live_render: 2, live_render: 3, live_link: 1, live_link: 2]
-      alias LiveViewDemoWeb.Router.Helpers, as: Routes
+      alias HTTPingWeb.Router.Helpers, as: Routes
     end
   end
 

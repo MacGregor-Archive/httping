@@ -1,5 +1,5 @@
-defmodule LiveViewDemoWeb.Router do
-  use LiveViewDemoWeb, :router
+defmodule HTTPingWeb.Router do
+  use HTTPingWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -10,7 +10,7 @@ defmodule LiveViewDemoWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  scope "/", LiveViewDemoWeb do
+  scope "/", HTTPingWeb do
     pipe_through :browser
     live "/", PingLive
     live "/:url", PingLive

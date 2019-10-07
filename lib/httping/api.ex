@@ -1,4 +1,4 @@
-defmodule LiveViewDemo.API do
+defmodule HTTPing.API do
   @moduledoc """
   API client to perform HTTP checks
   """
@@ -25,7 +25,7 @@ defmodule LiveViewDemo.API do
   end
 
   defp config do
-    Application.get_env(:live_view_demo, LiveViewDemo)
+    Application.get_env(:httping, HTTPing)
   end
 
   defp endpoint do

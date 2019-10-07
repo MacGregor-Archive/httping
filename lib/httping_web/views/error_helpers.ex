@@ -1,4 +1,4 @@
-defmodule LiveViewDemoWeb.ErrorHelpers do
+defmodule HTTPingWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """

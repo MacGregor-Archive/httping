@@ -7,14 +7,14 @@
 
 <%= if assigns[:url] && !assigns[:response] do %>
   <h1 class="text-2xl font-semibold flex">
-    <%= live_link "<-", to: Routes.live_path(@socket, LiveViewDemoWeb.PingLive) %>
+    <%= live_link "<-", to: Routes.live_path(@socket, HTTPingWeb.PingLive) %>
     <%= assigns[:url] %>
   </h1>
 <% end %>
 
 <%= if assigns[:response] do %>
   <h1 class="text-2xl font-semibold flex">
-    <%= live_link "<-", to: Routes.live_path(@socket, LiveViewDemoWeb.PingLive) %>
+    <%= live_link "<-", to: Routes.live_path(@socket, HTTPingWeb.PingLive) %>
     <%= assigns[:url] %>
     <%= Enum.map(assigns[:response], fn x -> x |> Map.get("trace") |> Map.get("t11_ttfb") |> div(1000) end) |> Enum.sum %>ms
   </h1>

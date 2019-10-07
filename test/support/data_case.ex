@@ -1,4 +1,4 @@
-defmodule LiveViewDemo.DataCase do
+defmodule HTTPing.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -16,7 +16,7 @@ defmodule LiveViewDemo.DataCase do
 
   using do
     quote do
-      import LiveViewDemo.DataCase
+      import HTTPing.DataCase
     end
   end
 

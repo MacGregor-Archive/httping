@@ -1,7 +1,7 @@
-defmodule LiveViewDemoWeb.PingLive do
+defmodule HTTPingWeb.PingLive do
   use Phoenix.LiveView
-  alias LiveViewDemoWeb.PingView
-  alias LiveViewDemoWeb.Router.Helpers, as: Routes
+  alias HTTPingWeb.PingView
+  alias HTTPingWeb.Router.Helpers, as: Routes
 
   def render(assigns), do: PingView.render("dashboard.html", assigns)
 
@@ -15,7 +15,7 @@ defmodule LiveViewDemoWeb.PingLive do
 
   def handle_info(:check, socket) do
     IO.puts("Checking #{socket.assigns[:url]}")
-    response = LiveViewDemo.API.get(socket.assigns[:url])
+    response = HTTPing.API.get(socket.assigns[:url])
     if connected?(socket), do: :timer.send_after(10_000, self(), :check)
     {:noreply, socket |> assign(:response, response)}
   end
@@ -25,8 +25,7 @@ defmodule LiveViewDemoWeb.PingLive do
   end
 
   def handle_event("save", %{"check" => %{"url" => url}}, socket) do
-    {:noreply,
-     live_redirect(socket, to: Routes.live_path(socket, LiveViewDemoWeb.PingLive, url: url))}
+    {:noreply, live_redirect(socket, to: Routes.live_path(socket, HTTPingWeb.PingLive, url: url))}
   end
 
   def handle_params(%{"url" => url}, _uri, socket) do

@@ -45,3 +45,4 @@ jobs:
           mix phx.digest
         env:
           MIX_ENV: prod
+          SECRET_KEY_BASE: w/eLXRLS1u0eVV59nKi/nVGYgkas4D3Lo5xj0lZ2oeFa3ceuQW38Gn/6b1m1aYpz
